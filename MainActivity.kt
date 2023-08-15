@@ -14,7 +14,7 @@ import java.net.InetSocketAddress
 
 private val INTERNET_PERMISSION_CODE = 1001
 
-val serverPort = 5000 // Hier den Port des Servers angeben
+val serverPort = 5000 // Server Port
 
 fun createJsonPacket(of_off : String ): String {
     val jsonData = JSONObject()
@@ -25,27 +25,27 @@ fun createJsonPacket(of_off : String ): String {
 
 fun send_package(IP_adress :String, on_off : String) {
     Thread {
-            val timeoutMillis = 1000 // Timeout in Millisekunden (hier: 1 Sekunden)
-            val jsonPacket = createJsonPacket(on_off)
+        val timeoutMillis = 1000 // Timeout in Millisec ( 1 second)
+        val jsonPacket = createJsonPacket(on_off)
 
-            val socket = Socket()
+        val socket = Socket()
 
-            try {
-                val socketAddress = InetSocketAddress(IP_adress, serverPort)
-                socket.connect(socketAddress, timeoutMillis)
+        try {
+            val socketAddress = InetSocketAddress(IP_adress, serverPort)
+            socket.connect(socketAddress, timeoutMillis)
 
-                val writer = BufferedWriter(OutputStreamWriter(socket.getOutputStream()))
-                writer.write(jsonPacket)
-                writer.newLine()
-                writer.flush()
+            val writer = BufferedWriter(OutputStreamWriter(socket.getOutputStream()))
+            writer.write(jsonPacket)
+            writer.newLine()
+            writer.flush()
 
-                println("JSON-Paket wurde erfolgreich gesendet: $jsonPacket")
-            } catch (e: Exception) {
-                println("Fehler beim Verbinden oder Senden: ${e.message}")
-            } finally {
-                socket.close()
-            }
-        }.start()
+            println("Send successfully: $jsonPacket")
+        } catch (e: Exception) {
+            println("Error during connect or transmission: ${e.message}")
+        } finally {
+            socket.close()
+        }
+    }.start()
 
 
 
