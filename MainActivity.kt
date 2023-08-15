@@ -1,5 +1,3 @@
-package com.example.pico_control_app
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Build
