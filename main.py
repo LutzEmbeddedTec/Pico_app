@@ -53,6 +53,5 @@ while True:
         print('Turning LED off...')
         led.value(0)
     else:
-        # 
-
+        print('Error')
     conn.close()
